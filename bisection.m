@@ -20,8 +20,8 @@ for i = 1:max_iter
     oldVal = Xr;
     
     table(i,:) = [Xl Xu Xr fXl fXu fXr error];
-    plot(Xl, x, 'r'); plot(Xu, x, 'g');
-    hold on;
+    plot(Xl, x, 'r'); hold on;
+    plot(Xu, x, 'g'); hold on;
     
     if fXr == 0
         result = Xr;
@@ -35,7 +35,7 @@ for i = 1:max_iter
     Xr = (Xl + Xu) / 2.0;
     error = vpa(abs(Xr - oldVal));
     
-    if vpa(abs(Es - error)) < 10e-6 || i > limit
+    if error < Es || i > limit
         break
     end
 end

@@ -240,9 +240,12 @@ switch method
     case 1  % 'Bisection'
         answer = bisection(xl, xu, error, imax, func, handles);
     case 2  % 'False Position (Regula Falsi)'
+        answer = false_position(xl, xu, error, imax, func, handles);
     case 3  % 'Fixed Point'
     case 4  % 'Newton Raphson'
+        answer = newton_raphson(x0, error, imax, func, handles);
     case 5  % 'Secant'
+        answer = secant(x0, x1, error, imax, func, handles);
 end
 
 set(handles.answer_text, 'String', answer);
