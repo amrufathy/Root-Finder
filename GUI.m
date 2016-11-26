@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 25-Nov-2016 00:20:03
+% Last Modified by GUIDE v2.5 26-Nov-2016 14:55:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -263,6 +263,52 @@ function answer_text_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function answer_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to answer_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function execution_time_text_Callback(hObject, eventdata, handles)
+% hObject    handle to execution_time_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of execution_time_text as text
+%        str2double(get(hObject,'String')) returns contents of execution_time_text as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function execution_time_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to execution_time_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function num_iterations_text_Callback(hObject, eventdata, handles)
+% hObject    handle to num_iterations_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of num_iterations_text as text
+%        str2double(get(hObject,'String')) returns contents of num_iterations_text as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function num_iterations_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to num_iterations_text (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
