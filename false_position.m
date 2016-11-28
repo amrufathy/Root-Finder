@@ -14,13 +14,13 @@ hold on;
 
 tic;
 for i = 1:max_iter
-    fxu = getfx(equation, Xu);
-    fxl = getfx(equation, Xl);
+    fxu = double(getfx(equation, Xu));
+    fxl = double(getfx(equation, Xl));
     
-    Xr = (Xl * fxu - Xu * fxl) / (fxu - fxl) * 1.0;
-    fxr = getfx(equation, Xr);
+    Xr = double(vpa(((Xl * fxu - Xu * fxl) / (fxu - fxl)), 8));
+    fxr = double(getfx(equation, Xr));
 
-    error = (abs(Xr - oldVal));
+    error = double(abs(Xr - oldVal));
     table(i,:) = [Xl Xu fxl fxu Xr fxr error];
     plot(Xl, x, 'r'); hold on;
     plot(Xu, x, 'g'); hold on;

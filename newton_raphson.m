@@ -14,26 +14,25 @@ hold on;
 
 tic;
 for i = 1:max_iter
-    fx_1 = getfx(equation, Xprev);
-    dfx = getndfx(equation, 1, Xprev);
+    fx_1 = double(getfx(equation, Xprev));
+    dfx = double(getndfx(equation, 1, Xprev));
     
     if dfx == 0
         iterations = i;
         break
     end
     
-    Xnow = Xprev - (fx_1 * 1.0 / dfx);
-    fx = getfx(equation, Xnow);
+    Xnow = double(Xprev - (fx_1 * 1.0 / dfx));
+    fx = double(getfx(equation, Xnow));
     
-    error = vpa(abs(Xnow - Xprev));
+    error = double(abs(Xnow - Xprev));
     
     if error < Es
         iterations = i;
         break
     end
     
-    table(i,:) = [Xprev Xnow fx_1 fx Es];
-    disp([Xprev Xnow fx_1 fx Es]);
+    table(i,:) = [Xprev Xnow fx_1 fx error];
     Xprev = Xnow;
 end
 

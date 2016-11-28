@@ -16,9 +16,9 @@ hold on;
 
 tic;
 for i = 1:max_iter 
-    fXr = getfx(equation, Xr);
-    fXl = getfx(equation, Xl);
-    fXu = getfx(equation, Xu);
+    fXr = double(getfx(equation, Xr));
+    fXl = double(getfx(equation, Xl));
+    fXu = double(getfx(equation, Xu));
     oldVal = Xr;
     
     table(i,:) = [Xl Xu Xr fXl fXu fXr error];
@@ -34,8 +34,8 @@ for i = 1:max_iter
         Xu = Xr;  
     end
             
-    Xr = (Xl + Xu) / 2.0;
-    error = vpa(abs(Xr - oldVal));
+    Xr = double((Xl + Xu) / 2.0);
+    error = double(abs(Xr - oldVal));
     
     if error < Es || i > limit
         iterations = i;
