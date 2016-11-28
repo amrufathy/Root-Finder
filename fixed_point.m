@@ -1,11 +1,12 @@
-function [result] = fixed_point(x, Es, max_iter, equation, handles)
+function [result] = fixed_point(X0, Es, max_iter, equation, handles)
 
 column = {'Xi' 'Xi+1' 'Es'};
 set(handles.table,'ColumnName' , column);
 
-g = strcat(equation, ' + x');
+% g = strcat(equation, ' + x');
+g = equation;
 iterations = max_iter;
-Xnow = x;
+Xnow = X0;
 
 tic;
 for i = 1:max_iter

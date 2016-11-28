@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 26-Nov-2016 14:55:40
+% Last Modified by GUIDE v2.5 28-Nov-2016 21:40:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -114,7 +114,15 @@ function method_menu_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns method_menu contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from method_menu
+method = get(handles.method_menu, 'Value');
 
+if method == 3
+    set(handles.gofx,'visible','on');
+    set(handles.gofx_text,'visible','on');
+else
+    set(handles.gofx,'visible','off');
+    set(handles.gofx_text,'visible','off');
+end
 
 % --- Executes during object creation, after setting all properties.
 function method_menu_CreateFcn(hObject, eventdata, handles)
@@ -242,6 +250,7 @@ switch method
     case 2  % 'False Position (Regula Falsi)'
         answer = false_position(xl, xu, error, imax, func, handles);
     case 3  % 'Fixed Point'
+        func = get(handles.gofx_text, 'String');
         answer = fixed_point(x0, error, imax, func, handles);
     case 4  % 'Newton-Raphson'
         answer = newton_raphson(x0, error, imax, func, handles);
@@ -312,6 +321,29 @@ function num_iterations_text_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function num_iterations_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to num_iterations_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function gofx_text_Callback(hObject, eventdata, handles)
+% hObject    handle to gofx_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of gofx_text as text
+%        str2double(get(hObject,'String')) returns contents of gofx_text as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function gofx_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to gofx_text (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
