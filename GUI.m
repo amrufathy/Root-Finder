@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 28-Nov-2016 21:40:50
+% Last Modified by GUIDE v2.5 16-Dec-2016 01:43:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -344,6 +344,37 @@ function gofx_text_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function gofx_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to gofx_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in upload_file.
+function upload_file_Callback(hObject, eventdata, handles)
+% hObject    handle to upload_file (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+txt_file = fileread(get(handles.file_path, 'Value'))
+
+
+function file_path_Callback(hObject, eventdata, handles)
+% hObject    handle to file_path (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of file_path as text
+%        str2double(get(hObject,'String')) returns contents of file_path as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function file_path_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to file_path (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
