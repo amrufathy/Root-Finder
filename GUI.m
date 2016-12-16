@@ -360,7 +360,33 @@ function upload_file_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-txt_file = fileread(get(handles.file_path, 'Value'))
+txt_file = fileread(get(handles.file_path,'Value'))
+method = get(handles.method_menu, 'Value');
+func = txt_file;
+
+x0 = str2num(get(handles.x0_text, 'String')); xl = x0;
+x1 = str2num(get(handles.x1_text, 'String')); xu = x1;
+imax = str2num(get(handles.iter_text, 'String'));
+error = str2num(get(handles.error_text, 'String'));
+
+% answer = 0;
+
+switch method
+    case 1  % 'Bisection'
+        answer = bisection(xl, xu, error, imax, func, handles);
+    case 2  % 'False Position (Regula Falsi)'
+        answer = false_position(xl, xu, error, imax, func, handles);
+    case 3  % 'Fixed Point'
+        func = get(handles.gofx_text, 'String');
+        answer = fixed_point(x0, error, imax, func, handles);
+    case 4  % 'Newton-Raphson'
+        answer = newton_raphson(x0, error, imax, func, handles);
+    case 5  % 'Secant'
+        answer = secant(x0, x1, error, imax, func, handles);
+    case 6  % 'Birge-Vieta'
+        answer = 0;
+
+end
 
 
 function file_path_Callback(hObject, eventdata, handles)
