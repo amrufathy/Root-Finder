@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 28-Nov-2016 21:40:50
+% Last Modified by GUIDE v2.5 22-Dec-2016 02:33:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -104,6 +104,7 @@ function plot_button_Callback(hObject, eventdata, handles)
 func = get(handles.equation_text, 'String');
 p = ezplot(func);
 set(p, 'Color', 'black', 'LineWidth', 2);
+grid on
 zoom on
 
 % --- Executes on selection change in method_menu.
@@ -352,3 +353,14 @@ function gofx_text_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in file_btn.
+function file_btn_Callback(hObject, eventdata, handles)
+% hObject    handle to file_btn (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+filename = uigetfile('*');
+file = fopen(filename, 'r');
+func = fscanf(file, '%s');
+set(handles.equation_text, 'String', func);
