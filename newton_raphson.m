@@ -18,22 +18,23 @@ for i = 1:max_iter
     dfx = double(getndfx(equation, 1, Xprev));
     
     if dfx == 0
-        iterations = i;
-        break
+        dfx = getaprfx(equation, 4);
+       dfx = dfx(Xprev+0.001,Xprev);
     end
     
     Xnow = double(Xprev - (fx_1 * 1.0 / dfx));
     fx = double(getfx(equation, Xnow));
     
     error = double(abs(Xnow - Xprev));
+
+    table(i,:) = [Xprev Xnow fx_1 fx error];
+    Xprev = Xnow;
     
     if error < Es
         iterations = i;
         break
     end
     
-    table(i,:) = [Xprev Xnow fx_1 fx error];
-    Xprev = Xnow;
 end
 
 exec_time = toc;
