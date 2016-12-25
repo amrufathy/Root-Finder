@@ -7,11 +7,13 @@ Xnew = 0;
 Xprev = X0;
 Xnow = X1;
 iterations = max_iter;
+x = -100:0.1:100;
 
 cla;
 p = ezplot(equation);
 set(p, 'Color', 'black', 'LineWidth', 2);
 hold on;
+grid on;
 
 tic;
 for i = 1:max_iter
@@ -24,22 +26,24 @@ for i = 1:max_iter
     end
     
     Xnew = double(Xnow - ((fx * (Xprev - Xnow)) / (fxp - fx)));
+    plot(Xnew, x, 'r'); hold on;
+    err = double(abs(Xnew - Xnow));
     
-    error = double(abs(Xnew - Xnow));
-    
-    if error < Es
+    if err < Es
         iterations = i;
         break
     end
     
-    table(i,:) = [Xprev Xnow fxp fx Xnew error];
+    table(i,:) = [Xprev Xnow fxp fx Xnew err];
     Xprev = Xnow;
     Xnow = Xnew;
+    
+    set(handles.table, 'Data', table);
+    pause(1/16);
 end
 
 exec_time = toc;
 set(handles.execution_time_text, 'String', exec_time);
-set(handles.table, 'Data', table);
 set(handles.num_iterations_text, 'String', iterations);
 result = Xnew;
 

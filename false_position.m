@@ -11,21 +11,27 @@ cla;
 p = ezplot(equation);
 set(p, 'Color', 'black', 'LineWidth', 2);
 hold on;
+grid on;
 
 tic;
 for i = 1:max_iter
     fxu = double(getfx(equation, Xu));
     fxl = double(getfx(equation, Xl));
     
-    Xr = double(vpa(((Xl * fxu - Xu * fxl) / (fxu - fxl)), 8));
+    if fxu - fxl == 0
+        iterations = i;
+        break
+    end
+    
+    Xr = (Xl * fxu - Xu * fxl) / (fxu - fxl);
     fxr = double(getfx(equation, Xr));
 
-    error = double(abs(Xr - oldVal));
-    table(i,:) = [Xl Xu fxl fxu Xr fxr error];
+    err = double(abs(Xr - oldVal));
+    table(i,:) = [Xl Xu fxl fxu Xr fxr err];
     plot(Xl, x, 'r'); hold on;
     plot(Xu, x, 'g'); hold on;
     
-    if error <= Es
+    if err <= Es
         iterations = i;
         break
     end
@@ -40,11 +46,13 @@ for i = 1:max_iter
     end
     
     oldVal = Xr;
+    
+    set(handles.table, 'Data', table);
+    pause(1/16);
 end
 
 exec_time = toc;
 set(handles.execution_time_text, 'String', exec_time);
-set(handles.table, 'Data', table);
 set(handles.num_iterations_text, 'String', iterations);
 result = Xr;
 

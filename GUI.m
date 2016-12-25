@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 22-Dec-2016 02:33:13
+% Last Modified by GUIDE v2.5 22-Dec-2016 02:56:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,6 +102,7 @@ function plot_button_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 func = get(handles.equation_text, 'String');
+cla;
 p = ezplot(func);
 set(p, 'Color', 'black', 'LineWidth', 2);
 grid on
@@ -243,8 +244,6 @@ x1 = str2num(get(handles.x1_text, 'String')); xu = x1;
 imax = str2num(get(handles.iter_text, 'String'));
 error = str2num(get(handles.error_text, 'String'));
 
-% answer = 0;
-
 switch method
     case 1  % 'Bisection'
         answer = bisection(xl, xu, error, imax, func, handles);
@@ -257,8 +256,6 @@ switch method
         answer = newton_raphson(x0, error, imax, func, handles);
     case 5  % 'Secant'
         answer = secant(x0, x1, error, imax, func, handles);
-    case 6  % 'Birge-Vieta'
-        answer = 0;
 end
 
 set(handles.answer_text, 'String', answer);
